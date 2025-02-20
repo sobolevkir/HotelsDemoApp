@@ -1,6 +1,5 @@
 package com.sobolevkir.hotels.presentation.screen.hotel_details
 
-import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
@@ -41,11 +40,7 @@ class HotelDetailsFragment : Fragment(R.layout.fragment_hotel_details) {
 
     private fun initClickListeners() {
         binding.toolbar.setNavigationOnClickListener {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                requireActivity().onBackPressedDispatcher.onBackPressed()
-            } else {
-                requireActivity().onBackPressed()
-            }
+            requireActivity().onBackPressedDispatcher.onBackPressed()
         }
     }
 
