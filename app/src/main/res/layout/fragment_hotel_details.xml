@@ -78,8 +78,10 @@
                         android:id="@+id/textHotelStars"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
+                        android:textSize="20sp"
+                        android:textColor="@android:color/holo_orange_light"
                         android:textStyle="bold"
+                        android:layout_marginBottom="16dp"
                         tools:text="★★★★☆" />
 
                     <TextView
@@ -88,7 +90,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="?android:textColorSecondary"
                         android:textSize="14sp"
-                        tools:text="1.2 km from center" />
+                        tools:text="100m from center" />
 
                     <TextView
                         android:id="@+id/textAvailableSuites"
@@ -104,7 +106,13 @@
                         android:layout_height="wrap_content"
                         android:textColor="?android:textColorSecondary"
                         android:textSize="14sp"
-                        tools:text="Lat: 40.7128, Lon: -74.0060" />
+                        tools:text="Lat: 00.00000, Lon: 00.00000" />
+
+                    <org.osmdroid.views.MapView
+                        android:id="@+id/mapView"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_marginTop="16dp"/>
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -129,8 +137,7 @@
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imageHotel"
-                tools:text="Failed to load hotel details" />
+                app:layout_constraintTop_toBottomOf="@id/imageHotel" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

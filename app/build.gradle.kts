@@ -3,7 +3,6 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     kotlin("plugin.serialization")
-    alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
     alias(libs.plugins.hilt)
     alias(libs.plugins.ksp)
     alias(libs.plugins.room)
@@ -20,7 +19,6 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "com.sobolevkir.hotels.HiltCustomTestRunner"
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments["room.schemaLocation"] = "$projectDir/schemas"
@@ -76,16 +74,14 @@ dependencies {
     ksp(libs.hilt.android.compiler)
     implementation(libs.hilt.navigation.compose)
     // Network
-    implementation(libs.gson)
     implementation(libs.bundles.retrofit)
     // Database
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
-    // Images & animations
+    // Images & Maps
     implementation(libs.coil.compose)
-    implementation(libs.lottie.compose)
-    implementation(libs.androidx.material.icons.extended)
+    implementation(libs.osmdroid.android)
     // Testing
     testImplementation(libs.junit)
     debugImplementation(libs.androidx.ui.tooling)
@@ -94,8 +90,4 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
-    kspAndroidTest(libs.hilt.android.compiler)
-    kspAndroidTest(libs.hilt.compiler)
-    testImplementation(libs.hilt.android.testing)
-    androidTestImplementation(libs.hilt.android.testing)
 }
