@@ -1,0 +1,29 @@
+<resources>
+
+    <string name="app_name" translatable="false">Hotels</string>
+
+    <string name="title_hotels">Отели</string>
+    <string name="title_hotel_details">Информация об отеле</string>
+
+    <string name="message_empty_data">Ничего не нашлось :(</string>
+    <string name="message_loading">Загружаем список…</string>
+    <string name="message_connection_error">Ошибка соединения. Проверьте подключение к интернету</string>
+    <string name="message_unknown_error">Что-то пошло не так. Попробуйте повторить запрос позже</string>
+
+    <string name="hotel_stars">%1$d ★</string>
+    <string name="filled_star">★</string>
+    <string name="unfilled_star">☆</string>
+    <string name="hotel_address">Адрес: %1$s</string>
+    <string name="hotel_distance">Расстояние от центра: %.1fм</string>
+    <string name="hotel_available_suites">Свободных номеров: %1$d</string>
+    <string name="hotel_coordinates">Координаты: %1$.6f, %2$.6f</string>
+
+    <string name="label_sort">Сортировка</string>
+    <string name="sort_default">По умолчанию</string>
+    <string name="sort_distance">По расстоянию от центра</string>
+    <string name="sort_available_suites">По доступным номерам</string>
+
+    <string name="btn_refresh">Обновить</string>
+    <string name="hint_hotel_photo">Hotel photo</string>
+
+</resources>
