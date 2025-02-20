@@ -1,5 +1,6 @@
 package com.sobolevkir.hotels.presentation.screen.hotel_details
 
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
@@ -28,7 +29,20 @@ class HotelDetailsFragment : Fragment(R.layout.fragment_hotel_details) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentHotelDetailsBinding.bind(view)
+        val hotelId: Long = arguments?.getLong("id") ?: return
+        viewModel.loadData(hotelId)
+        initClickListeners()
         observeUiState()
+    }
+
+    private fun initClickListeners() {
+        binding.toolbar.setNavigationOnClickListener {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                requireActivity().onBackPressedDispatcher.onBackPressed()
+            } else {
+                requireActivity().onBackPressed()
+            }
+        }
     }
 
     private fun observeUiState() {

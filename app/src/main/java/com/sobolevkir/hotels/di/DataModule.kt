@@ -7,14 +7,14 @@ import com.sobolevkir.hotels.data.HotelsRepositoryImpl
 import com.sobolevkir.hotels.data.local.LocalDataSource
 import com.sobolevkir.hotels.data.local.dao.HotelsDao
 import com.sobolevkir.hotels.data.local.database.AppDatabase
+import com.sobolevkir.hotels.data.mapper.HotelDetailsEntityMapper
 import com.sobolevkir.hotels.data.mapper.HotelDetailsMapper
-import com.sobolevkir.hotels.data.mapper.HotelEntityMapper
+import com.sobolevkir.hotels.data.mapper.HotelsEntityMapper
 import com.sobolevkir.hotels.data.mapper.HotelsMapper
 import com.sobolevkir.hotels.data.remote.RemoteDataSource
 import com.sobolevkir.hotels.data.remote.api.HotelsApiService
 import com.sobolevkir.hotels.domain.api.HotelDetailsRepository
 import com.sobolevkir.hotels.domain.api.HotelsRepository
-import com.sobolevkir.hotels.domain.model.HotelDetails
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -38,8 +38,13 @@ object DataModule {
     }
 
     @Provides
-    fun provideHotelEntityMapper(): HotelEntityMapper {
-        return HotelEntityMapper()
+    fun provideHotelsEntityMapper(): HotelsEntityMapper {
+        return HotelsEntityMapper()
+    }
+
+    @Provides
+    fun provideHotelDetailsEntityMapper(): HotelDetailsEntityMapper {
+        return HotelDetailsEntityMapper()
     }
 
     @Provides
@@ -68,28 +73,28 @@ object DataModule {
         remoteDataSource: RemoteDataSource,
         localDataSource: LocalDataSource,
         hotelsMapper: HotelsMapper,
-        hotelEntityMapper: HotelEntityMapper
+        hotelsEntityMapper: HotelsEntityMapper
     ): HotelsRepository {
         return HotelsRepositoryImpl(
             remoteDataSource,
             localDataSource,
             hotelsMapper,
-            hotelEntityMapper
+            hotelsEntityMapper
         )
     }
 
     @Provides
     fun provideHotelDetailsRepository(
         remoteDataSource: RemoteDataSource,
-        //localDataSource: LocalDataSource,
+        localDataSource: LocalDataSource,
         hotelDetailsMapper: HotelDetailsMapper,
-        //hotelEntityMapper: HotelEntityMapper
+        hotelDetailsEntityMapper: HotelDetailsEntityMapper
     ): HotelDetailsRepository {
         return HotelDetailsRepositoryImpl(
             remoteDataSource,
-            //localDataSource,
+            localDataSource,
             hotelDetailsMapper,
-            //hotelEntityMapper
+            hotelDetailsEntityMapper
         )
     }
 

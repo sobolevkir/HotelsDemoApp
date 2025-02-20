@@ -1,7 +1,5 @@
 package com.sobolevkir.hotels.presentation.screen.hotel_details
 
-import android.util.Log
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sobolevkir.hotels.domain.usecase.GetHotelDetailsUseCase
@@ -16,34 +14,20 @@ import javax.inject.Inject
 @HiltViewModel
 class HotelDetailsViewModel @Inject constructor(
     private val getHotelDetailsUseCase: GetHotelDetailsUseCase,
-    savedStateHandle: SavedStateHandle
 ) : ViewModel() {
-
-    init {
-        loadData()
-    }
-
-    private val hotelId: Long = checkNotNull(savedStateHandle.get<Long>("id"))
 
     private val _uiState = MutableStateFlow(HotelDetailsUiState())
     val uiState: StateFlow<HotelDetailsUiState> = _uiState
+    private var isDataLoaded = false
 
-    fun onEvent(event: HotelDetailsUiEvent) {
-        when (event) {
-            is HotelDetailsUiEvent.Refresh -> loadData()
-            is HotelDetailsUiEvent.BackButtonPressed -> {}/*viewModelScope.launch {
-                _news.emit(HotelsNews.NavigateTo(Routes.HotelDetails(id = event.id)))
-            }*/
-        }
-    }
-
-    private fun loadData() {
+    fun loadData(hotelId: Long) {
+        if (isDataLoaded) return
         viewModelScope.launch {
             getHotelDetailsUseCase(hotelId).collect { result ->
-                Log.d("123", result.toString())
                 when (result) {
                     is Resource.Success -> {
                         val hotelDetails = result.data
+                        isDataLoaded = true
                         _uiState.update {
                             it.copy(
                                 isLoading = false,

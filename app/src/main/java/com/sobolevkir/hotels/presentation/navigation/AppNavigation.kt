@@ -1,16 +1,12 @@
 package com.sobolevkir.hotels.presentation.navigation
 
-import android.os.Bundle
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.os.bundleOf
 import androidx.navigation.NavHostController
@@ -20,7 +16,6 @@ import androidx.navigation.toRoute
 import com.sobolevkir.hotels.R
 import com.sobolevkir.hotels.presentation.screen.hotel_details.HotelDetailsFragment
 import com.sobolevkir.hotels.presentation.screen.hotels.HotelsScreen
-import com.sobolevkir.hotels.presentation.theme.HotelsTheme
 
 @Composable
 fun AppNavigation(navHostController: NavHostController) {
@@ -57,7 +52,9 @@ fun AppNavigation(navHostController: NavHostController) {
                             .commit()
                         container
                     },
-                    modifier = Modifier.fillMaxSize().padding(paddingValues)
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(paddingValues)
                 )
 
             }

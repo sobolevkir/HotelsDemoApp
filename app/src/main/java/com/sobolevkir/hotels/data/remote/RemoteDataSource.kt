@@ -11,27 +11,29 @@ import javax.inject.Inject
 class RemoteDataSource @Inject constructor(private val apiService: HotelsApiService) {
 
     suspend fun fetchHotels(): Resource<List<HotelResponse>> {
-        return try {
-            val response = apiService.getHotelsList()
-            if (response.isNotEmpty()) {
-                Resource.Success(response)
-            } else {
-                Resource.Error(R.string.message_empty_data)
-            }
-        } catch (e: IOException) {
-            Resource.Error(R.string.message_connection_error)
-        } catch (e: Exception) {
-            Resource.Error(R.string.message_unknown_error)
-        }
+        return fetchData(
+            fetch = { apiService.getHotelsList() },
+            emptyCheck = { it.isEmpty() }
+        )
     }
 
     suspend fun fetchHotelDetails(id: Long): Resource<HotelDetailsResponse> {
+        return fetchData(
+            fetch = { apiService.getHotelDetails(id) },
+            emptyCheck = { it.name.isEmpty() }
+        )
+    }
+
+    private suspend fun <T> fetchData(
+        fetch: suspend () -> T,
+        emptyCheck: (T) -> Boolean
+    ): Resource<T> {
         return try {
-            val response = apiService.getHotelDetails(id)
-            if (response.name.isNotEmpty()) {
-                Resource.Success(response)
-            } else {
+            val response = fetch()
+            if (emptyCheck(response)) {
                 Resource.Error(R.string.message_empty_data)
+            } else {
+                Resource.Success(response)
             }
         } catch (e: IOException) {
             Resource.Error(R.string.message_connection_error)

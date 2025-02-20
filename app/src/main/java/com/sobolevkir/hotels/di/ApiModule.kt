@@ -1,7 +1,5 @@
 package com.sobolevkir.hotels.di
 
-import com.sobolevkir.hotels.data.mapper.HotelsMapper
-import com.sobolevkir.hotels.data.remote.RemoteDataSource
 import com.sobolevkir.hotels.data.remote.api.ApiConstants
 import com.sobolevkir.hotels.data.remote.api.HotelsApiService
 import dagger.Module

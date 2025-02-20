@@ -5,6 +5,7 @@ import com.sobolevkir.hotels.domain.model.Hotel
 import javax.inject.Inject
 
 class HotelsMapper @Inject constructor() {
+
     fun map(response: List<HotelResponse>): List<Hotel> {
 
         // Можно в будущем перенести обработку отсутствующих значений в UI

@@ -1,7 +1,7 @@
 package com.sobolevkir.hotels.data
 
 import com.sobolevkir.hotels.data.local.LocalDataSource
-import com.sobolevkir.hotels.data.mapper.HotelEntityMapper
+import com.sobolevkir.hotels.data.mapper.HotelsEntityMapper
 import com.sobolevkir.hotels.data.mapper.HotelsMapper
 import com.sobolevkir.hotels.data.remote.RemoteDataSource
 import com.sobolevkir.hotels.domain.api.HotelsRepository
@@ -19,7 +19,7 @@ class HotelsRepositoryImpl @Inject constructor(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource,
     private val hotelsMapper: HotelsMapper,
-    private val hotelEntityMapper: HotelEntityMapper
+    private val hotelsEntityMapper: HotelsEntityMapper
 ) : HotelsRepository {
 
     override fun getHotels(): Flow<Resource<List<Hotel>>> = flow {
@@ -27,7 +27,7 @@ class HotelsRepositoryImpl @Inject constructor(
         emit(Resource.Loading)
 
         val cachedHotels = localDataSource.getHotels()
-            .map { hotelEntityMapper.mapToDomain(it ) }
+            .map { hotelsEntityMapper.mapToDomain(it) }
             .firstOrNull()
 
         if (!cachedHotels.isNullOrEmpty()) {
@@ -37,14 +37,16 @@ class HotelsRepositoryImpl @Inject constructor(
         when (val response = remoteDataSource.fetchHotels()) {
             is Resource.Success -> {
                 val hotels = hotelsMapper.map(response.data)
-                localDataSource.saveHotels(hotelEntityMapper.mapToEntity(hotels))
+                localDataSource.saveHotels(hotelsEntityMapper.mapToEntity(hotels))
                 emit(Resource.Success(hotels))
             }
+
             is Resource.Error -> {
                 if (cachedHotels.isNullOrEmpty()) {
                     emit(Resource.Error(response.messageResId))
                 }
             }
+
             is Resource.Loading -> Unit
         }
 

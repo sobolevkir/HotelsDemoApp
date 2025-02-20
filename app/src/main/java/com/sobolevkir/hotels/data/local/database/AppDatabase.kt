@@ -3,10 +3,11 @@ package com.sobolevkir.hotels.data.local.database
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.sobolevkir.hotels.data.local.dao.HotelsDao
+import com.sobolevkir.hotels.data.local.entity.HotelDetailsEntity
 import com.sobolevkir.hotels.data.local.entity.HotelEntity
 
 @Database(
-    entities = [HotelEntity::class],
+    entities = [HotelEntity::class, HotelDetailsEntity::class],
     version = 1,
     exportSchema = false
 )
