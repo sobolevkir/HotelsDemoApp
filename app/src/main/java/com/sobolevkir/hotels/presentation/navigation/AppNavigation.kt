@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.os.bundleOf
+import androidx.fragment.app.commit
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -46,10 +47,9 @@ fun AppNavigation(navHostController: NavHostController) {
                         val fragment = HotelDetailsFragment().apply {
                             arguments = bundleOf("id" to hotelId)
                         }
-                        (context as AppCompatActivity).supportFragmentManager
-                            .beginTransaction()
-                            .replace(R.id.fragment_container, fragment)
-                            .commit()
+                        (context as AppCompatActivity).supportFragmentManager.commit {
+                            replace(R.id.fragment_container, fragment)
+                        }
                         container
                     },
                     modifier = Modifier

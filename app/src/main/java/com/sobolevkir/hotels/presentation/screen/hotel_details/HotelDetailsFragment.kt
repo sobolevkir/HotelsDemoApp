@@ -32,8 +32,8 @@ class HotelDetailsFragment : Fragment(R.layout.fragment_hotel_details) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentHotelDetailsBinding.bind(view)
-        val hotelId: Long = arguments?.getLong("id") ?: return
-        viewModel.loadData(hotelId)
+        val hotelId: Long? = arguments?.getLong("id")
+        viewModel.loadData(hotelId ?: -1L)
         initClickListeners()
         observeUiState()
     }
@@ -92,7 +92,7 @@ class HotelDetailsFragment : Fragment(R.layout.fragment_hotel_details) {
 
     private fun initMap(lat: Double, lon: Double, name: String) {
         val mapView = binding.mapView
-        Configuration.getInstance().userAgentValue = context?.packageName;
+        Configuration.getInstance().userAgentValue = context?.packageName
         mapView.setTileSource(TileSourceFactory.MAPNIK)
         mapView.setMultiTouchControls(true)
 
