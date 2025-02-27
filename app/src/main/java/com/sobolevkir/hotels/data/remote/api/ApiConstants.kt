@@ -1,7 +1,9 @@
 package com.sobolevkir.hotels.data.remote.api
 
+import com.sobolevkir.hotels.BuildConfig
+
 // Api config constants
 object ApiConstants {
-    const val BASE_URL = "https://raw.githubusercontent.com/iMofas/ios-android-test/master/"
-    const val HOTELS_LIST_ENDPOINT = "0777.json"
+    const val BASE_URL = BuildConfig.apiUrl
+    const val HOTELS_LIST_ENDPOINT = BuildConfig.hotelsEndpoint
 }

@@ -29,11 +29,15 @@ class HotelDetailsFragment : Fragment(R.layout.fragment_hotel_details) {
 
     private val viewModel: HotelDetailsViewModel by viewModels()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val hotelId: Long? = arguments?.getLong("id")
+        viewModel.loadData(hotelId ?: -1L)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentHotelDetailsBinding.bind(view)
-        val hotelId: Long? = arguments?.getLong("id")
-        viewModel.loadData(hotelId ?: -1L)
         initClickListeners()
         observeUiState()
     }
