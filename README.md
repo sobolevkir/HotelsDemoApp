@@ -1,5 +1,5 @@
 # HotelsDemoApp
-This is a learning project that demonstrates a way to integrate a fragment in an application that uses Jetpack Compose.
+This is a learning project that demonstrates a way to integrate a fragment in an application that uses Jetpack Compose. Android 8.0 (SDK 26+) support.
 
 ## Stack
 - Clean Architecture
