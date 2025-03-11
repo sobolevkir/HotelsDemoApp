@@ -5,8 +5,10 @@ import com.sobolevkir.hotels.data.remote.api.HotelsApiService
 import com.sobolevkir.hotels.data.remote.model.HotelDetailsResponse
 import com.sobolevkir.hotels.data.remote.model.HotelResponse
 import com.sobolevkir.hotels.util.Resource
+import kotlinx.coroutines.ensureActive
 import java.io.IOException
 import javax.inject.Inject
+import kotlin.coroutines.coroutineContext
 
 class RemoteDataSource @Inject constructor(private val apiService: HotelsApiService) {
 
@@ -38,6 +40,7 @@ class RemoteDataSource @Inject constructor(private val apiService: HotelsApiServ
         } catch (e: IOException) {
             Resource.Error(R.string.message_connection_error)
         } catch (e: Exception) {
+            coroutineContext.ensureActive()
             Resource.Error(R.string.message_unknown_error)
         }
     }
